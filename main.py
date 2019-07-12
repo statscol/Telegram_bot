@@ -28,16 +28,10 @@ from tensorflow.keras.callbacks import TensorBoard,EarlyStopping, ModelCheckpoin
 
 
 
-#modfinal=load_model("C:/Users/jhonp/speechmod/CNN_FINAL-20-0.798.h5")
 
-#if not modfinal:
-#    a=1
-#else:
-#    a=0
-    
 
 classes=['cat', 'dog', 'eight', 'five', 'four', 'nine', 'no', 'off', 'on', 'one', 'seven', 'six', 'stop', 'three', 'tree', 'two', 'yes', 'zero', '_background_noise_']
-DIR_TEST='C:/Users/jhonp/imagebot/'
+DIR_TEST='YOUR_DIR_IMAGES_TO_SEND_HERE'
 
 
 def get_image(DIR_TEST):
@@ -92,7 +86,7 @@ def pred_voice(vpath):
         return (img_array)
 
  
-    img_test=oggtospec(src_filename = vpath,dest_filename = "C:/Users/jhonp/test2w.wav",img_size=100)
+    img_test=oggtospec(src_filename = vpath,dest_filename = "IMG_CONVERTEDTOWAV_NAME.wav",img_size=100)
     prediction=np.argmax(modfinal.predict(np.array(img_test).reshape(-1,100,100,1)),axis=1)
     classp=classes[prediction[0]]
     #os.remove(vpath)
@@ -124,7 +118,6 @@ word_tokens = nltk.word_tokenize(raw)# converts to list of words
 
 lemmer = nltk.stem.WordNetLemmatizer()
 
-#WordNet is a semantically-oriented dictionary of English included in NLTK.
 def LemTokens(tokens):
     return [lemmer.lemmatize(token) for token in tokens]
 
@@ -263,7 +256,7 @@ def howareu(bot, update):
     bot.send_message(chat_id=chat_id, text=howare)
 
 def main():
-    updater = Updater('661340966:AAEK38q9twh8Sgnmig64I78cFg19ZCJOmbg')
+    updater = Updater('YOUR_KEY_HERE')
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('dog',dog))
     dp.add_handler(CommandHandler('start',start))
